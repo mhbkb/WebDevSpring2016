@@ -1,10 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Forms Fields</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/dashboard.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
 
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Form Maker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Username</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li class="active"><a href="forms.html">Forms</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Forms</h1>
+            <div class="row">
+                <div class="col-sm-3">
+                    <ul class="nav nav-pills nav-justified">
+                        <li><a href="forms.html">Forms</a></li>
+                        <li class="active"><a href="form-fields.html">Fields</a></li>
+                    </ul>
+                </div>
+            </div><br/>
+            <div class="row">
+                <div class="col-sm-6">
+                    First Name:
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="First Name">
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-align-justify"></span></a>
+                        </div>
+                    </div><br/>
+
+                    Last Name:
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="Last Name">
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-align-justify"></span></a>
+                        </div>
+                    </div><br/>
+
+                    Date of Birth:
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input type="date" class="form-control" placeholder="Select Date">
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-align-justify"></span></a>
+                        </div>
+                    </div><br/>
+
+                    Gender:
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-align-justify"></span></a>
+                        </div>
+                    </div><br/>
+
+                    Roles:
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Admin
+                                    </label>
+                                </div>
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Student
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> User
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-align-justify"></span></a>
+                        </div>
+                    </div><br/>
+
+                    License Agreement:
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="license"> Yes
+                                    </label>
+                                </div>
+
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="license"> No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-align-justify"></span></a>
+                        </div>
+                    </div><br/>
+
+                    <hr/>
+
+                    Add New Field:
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option>Single Line Text</option>
+                                    <option>Date</option>
+                                    <option>Dropdown</option>
+                                    <option>Checkboxes</option>
+                                    <option>Radio buttons</option>
+                                    <option>Paragraph Text Field</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>
