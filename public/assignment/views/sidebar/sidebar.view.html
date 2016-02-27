@@ -1,0 +1,8 @@
+<div class="col-sm-3 col-md-2 sidebar" ng-controller="SidebarController">
+    <ul class="nav nav-sidebar">
+        <li><a href="#/home">Home</a></li>
+        <li ng-show="user"><a href="#/profile">Profile</a></li>
+        <li ng-show="user"><a href="#/forms">Form</a></li>
+        <li ng-show="user && user.role==='admin'"><a href="#/Admin">Admin</a></li>
+    </ul>
+</div>

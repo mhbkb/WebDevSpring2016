@@ -1,0 +1,38 @@
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">Register</h1>
+
+    <div ng-show="message" class="alert alert-danger" role="alert">{{message}}</div>
+
+    <div class="row placeholders">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="username" class="col-sm-3 control-label">Username</label>
+                <div class="col-sm-5">
+                    <input ng-model="user.username" type="text" class="form-control" id="username" placeholder="Username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-3 control-label">Password:</label>
+                <div class="col-sm-5">
+                    <input ng-model="user.password" type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-3 control-label">Verify Password:</label>
+                <div class="col-sm-5">
+                    <input ng-model="user.password2" type="password" class="form-control" id="inputPassword3" placeholder="Verify Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
+                <div class="col-sm-5">
+                    <input ng-model="user.email" type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <a href="profile.html" type="button" class="col-sm-offset-2 col-sm-5 btn btn-primary"
+                   ng-click="register(user)">Register</a>
+            </div>
+        </form>
+    </div>
+</div>
