@@ -33,7 +33,7 @@
                 $scope.message = "User already exists";
                 return;
             }
-            alert(123);
+
             UserService.createUser($scope.user,
                 function(response) {
                     UserService.setCurrentUser(response);

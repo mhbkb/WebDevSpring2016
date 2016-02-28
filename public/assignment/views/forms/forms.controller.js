@@ -14,21 +14,26 @@
         $scope.selectForm = selectForm;
 
         var userId = $scope.currentUser._id;
+        FormService.findAllFormsForUser(userId, function(response) {
+                $scope.forms = response;
+            })
 
         function addForm(form) {
             FormService.createFormForUser(userId, form, function(response) {
                 console.log(response);
                 $scope.forms.push(form);
+                $scope.form = null;
             })
         }
 
         var selectedFormIndex = -1;
         function updateForm(form) {
-            FormService.update(form["_id"], form, function(response) {
+            FormService.updateFormById(form["_id"], form, function(response) {
                 console.log(response);
                 for(var i = 0; i < $scope.forms.length; i++){
-                    if($scope.forms[i]['_id'] == formId){
+                    if($scope.forms[i]['_id'] == form["_id"]){
                         $scope.forms[i] = form;
+                        $scope.form = null;
                         break;
                     }
                 }
@@ -36,9 +41,10 @@
         }
 
         function deleteForm(form) {
-            FormService.deleteFormById(form["_id"], function(response) {
-                console.log(response);
-                $scope.forms = response;
+            FormService.deleteFormById(form["_id"], function(response1) {
+                FormService.findAllFormsForUser(userId, function(response2) {
+                    $scope.forms = response2;
+                })
             })
         }
 

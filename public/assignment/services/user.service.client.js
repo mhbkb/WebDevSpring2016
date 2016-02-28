@@ -74,7 +74,7 @@
         function deleteUserById(userId, callback) {
             for(var u in model.users){
                 if(model.users[u]._id == userId){
-                    users.splice(u, 1);
+                    model.users.splice(u, 1);
                 }
             }
             callback(users);
@@ -84,7 +84,7 @@
             for(var u in model.users){
                 if(model.users[u]._id == userId){
                     model.users[u] = user;
-                    callback(users[i]);
+                    callback(model.users[u]);
                 }
             }
         }
