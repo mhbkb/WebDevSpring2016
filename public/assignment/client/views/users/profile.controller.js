@@ -10,7 +10,11 @@
         $scope.error = null;
         $scope.message = null;
 
-        $scope.currentUser = UserService.getCurrentUser();
+        UserService
+            .getCurrentUser()
+            .then(function(response){
+                $scope.currentUser = response.data;
+            })
 
         if (!$scope.currentUser) {
             $location.url("/home");
@@ -22,17 +26,16 @@
             $scope.error = null;
             $scope.message = null;
 
-            UserService.updateUser(user._id, user,
-                function(response){
-                    $scope.currentUser = response;
+            UserService
+                .updateUser(user._id, user)
+                .then(function(response){
+                    if (response) {
+                        $scope.message = "User updated successfully";
+                        $scope.currentUser = response.data;
+                    } else {
+                        $scope.message = "Unable to update the user";
+                    }
                 });
-
-            if (user) {
-                $scope.message = "User updated successfully";
-                UserService.setCurrentUser($scope.currentUser);
-            } else {
-                $scope.message = "Unable to update the user";
-            }
         }
     }
 })();

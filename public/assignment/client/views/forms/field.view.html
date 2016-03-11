@@ -1,0 +1,105 @@
+<div class="col-sm-9 main">
+    <h1 class="page-header">Forms</h1>
+    <div class="row">
+        <div class="col-sm-3">
+            <ul class="nav nav-pills nav-justified">
+                <li><a href="#/forms">Forms</a></li>
+                <li class="active"><a href="#/field">Fields</a></li>
+            </ul>
+        </div>
+    </div><br/>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row" ng-repeat="field in fields">
+                <div ng-switch on="field.fieldType">
+                    <div ng-switch-when="TEXT">
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="First Name">
+                        </div>
+                    </div>
+                    <div ng-switch-when="TEXTAREA">
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div ng-switch-when="DATE">
+                        <div class="col-sm-6">
+                            <input type="date" class="form-control" placeholder="Select Date">
+                        </div>
+                    </div>
+                    <div ng-switch-when="OPTIONS">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-switch-when="CHECKBOXES">
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Admin
+                                    </label>
+                                </div>
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Student
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> User
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-switch-when="RADIOS">
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="license"> Yes
+                                    </label>
+                                </div>
+
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="license"> No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
+                    <a ng-click="removeField(field)"><span class="glyphicon glyphicon-remove"></span></a>
+                    <a href="#"><span class="glyphicon glyphicon-align-justify"></span></a>
+                </div>
+            </div><br/>
+
+            <hr/>
+
+            Add New Field:
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <select class="form-control" ng-model="filedTypes"
+                                ng-options="type.key as type.name for type in filedTypes" >
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <a ng-click="addField(field.fieldType)"><span class="glyphicon glyphicon-plus"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

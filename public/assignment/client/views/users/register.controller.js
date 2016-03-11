@@ -28,17 +28,22 @@
                 $scope.message = "Passwords must match";
                 return;
             }
-            var user = UserService.findUserByUsername(user.username);
-            if (user != null) {
-                $scope.message = "User already exists";
-                return;
-            }
 
-            UserService.createUser($scope.user,
-                function(response) {
-                    UserService.setCurrentUser(response);
-                    $location.url("/profile");
-                });
+            UserService
+                .findUserByUsername(user.username)
+                .then(function(response) {
+                    if(response.data != null) {
+                        $scope.message = "User already exists!";
+                        return;
+                    } else {
+                        UserService
+                            .createUser($scope.user)
+                            .then(function(response) {
+                                UserService.setCurrentUser(response);
+                                $location.url("/profile");
+                            });
+                    }
+                })
         }
     }
 })();
