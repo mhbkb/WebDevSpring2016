@@ -12,7 +12,8 @@
             createFormForUser: createFormForUser,
             findAllFormsForUser: findAllFormsForUser,
             deleteFormById: deleteFormById,
-            updateFormById: updateFormById
+            updateFormById: updateFormById,
+            findFormById: findFormById
         };
         return api;
 
@@ -30,6 +31,10 @@
 
         function updateFormById(formId, newForm) {
             return $http.put("/api/assignment/form/" + formId, newForm);
+        }
+
+        function findFormById(formId) {
+            return $http.get("/api/assignment/form/" + formId);
         }
     }
 })();

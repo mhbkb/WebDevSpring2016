@@ -30,7 +30,7 @@ module.exports = function(app, formModel, userModel) {
     }
 
     function updateFormById(req, res) {
-        var formId = req.param.formId;
+        var formId = req.params.formId;
         var form = req.body;
         res.json(formModel.updateFormById(formId, form));
     }

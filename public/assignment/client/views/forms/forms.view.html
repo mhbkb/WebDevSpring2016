@@ -4,7 +4,6 @@
             <div class="col-sm-3">
                 <ul class="nav nav-pills nav-justified">
                     <li class="active"><a href="#/forms">Forms</a></li>
-                    <li><a href="#/form/{{formId}}/fields">Fields</a></li>
                 </ul>
             </div>
         </div>
@@ -26,7 +25,7 @@
                         </td>
                     </tr>
                     <tr ng-repeat="form in forms">
-                        <td><a href="form-fields.html">{{ form.title}}</a></td>
+                        <td><a href="#/form/{{ form._id}}/fields">{{ form.title}}</a></td>
                         <td>
                             <a class="col-sm-1" ng-click="selectForm(form)"><span class="glyphicon glyphicon-pencil"></span></a>
                             <a class="col-sm-1" ng-click="deleteForm(form)"><span class="glyphicon glyphicon-remove"></span></a>

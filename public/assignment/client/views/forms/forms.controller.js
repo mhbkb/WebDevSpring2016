@@ -35,7 +35,7 @@
                 .updateFormById(form["_id"], form)
                 .then(function(response) {
                     for(var i = 0; i < $scope.forms.length; i++){
-                        if($scope.forms[i]['_id'] == form["_id"]){
+                        if($scope.forms[i]['_id'] == form['_id']){
                             $scope.forms[i] = form;
                             $scope.form = null;
                             break;
@@ -57,7 +57,6 @@
 
         function selectForm(form) {
             selectedFormIndex = $scope.forms.indexOf(form);
-            console.log(form);
             $scope.form = form;
         }
     }
