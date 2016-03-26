@@ -22,8 +22,9 @@ module.exports = function(uuid) {
     function createFormForUser(userId, form) {
         form["_id"] = uuid.v4();
         form["userId"] = userId;
+        form["fields"] = new Array();
         mock.push(form);
-        return mock;
+        return form;
     }
 
     function findAllFormsForUser(userId) {
@@ -116,7 +117,7 @@ module.exports = function(uuid) {
         for(var i in mock){
             if(mock[i]['_id'] == formId){
                 field['_id'] = uuid.v4();
-                mock[i]["fields"].push(field);
+                mock[i].fields.push(field);
                 return mock[i]["fields"];
             }
         }

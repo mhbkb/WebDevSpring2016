@@ -24,7 +24,7 @@
             FormService
                 .createFormForUser(userId, form)
                 .then(function(response) {
-                    $scope.forms.push(form);
+                    $scope.forms.push(response.data);
                     $scope.form = null;
                 });
         }
