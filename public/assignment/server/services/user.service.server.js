@@ -1,7 +1,7 @@
 /**
  * Created by maohao on 16/3/10.
  */
-module.exports = function(app, formModel, userModel) {
+module.exports = function(app, userModel) {
     app.post("/api/assignment/user", register);
     app.get("/api/assignment/user", findUser);
     app.get("/api/assignment/user/:userId", findUserById);
@@ -16,9 +16,16 @@ module.exports = function(app, formModel, userModel) {
 
     function register(req, res) {
         var user = req.body;
-        user = userModel.createUser(user);
-        req.session.currentUser = user;
-        res.json(user);
+        userModel.createUser(user)
+            .then(
+                function( doc ) {
+                    req.session.currentUser = doc;
+                    res.json(doc);
+                },
+                function( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function findUser(req, res) {
@@ -34,47 +41,123 @@ module.exports = function(app, formModel, userModel) {
     }
 
     function findAllUsers(res) {
-        res.json(userModel.findAllUsers());
+        userModel.findAllUsers()
+            .then(
+                // login user if promise resolved
+                function ( doc ) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function findUserById(req, res) {
         var userId = req.params.userId;
-        var user = userModel.findUserById(userId);
-        res.json(user);
+        userModel.findUserById(userId)
+            .then(
+                // login user if promise resolved
+                function ( doc ) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function findUserByUsername(username, res) {
-        res.json(userModel.findUserByUsername(username));
+        userModel.findUserByUsername(username)
+            .then(
+                // login user if promise resolved
+                function ( doc ) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function findUserByCredentials(username, password, res) {
-        res.json(userModel.findUserByCredentials(username, password));
+        userModel.findUserByCredentials(username, password)
+            .then(
+                // login user if promise resolved
+                function ( doc ) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function updateUser(req, res) {
         var userId = req.params.userId;
         var user = req.body;
-        var newUser = userModel.updateUser(userId, user);
-        req.session.currentUser = newUser;
-        res.json(newUser);
+        userModel.updateUser(userId, user)
+            .then(
+                // login user if promise resolved
+                function ( doc ) {
+                    req.session.currentUser = user;
+                    res.json(user);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function deleteUserById(req, res) {
         var userId = req.params.userId;
-        res.json(userModel.deleteUserById(userId));
+        userModel.deleteUserById(userId)
+            .then(
+                // login user if promise resolved
+                function ( doc ) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function profile(req, res) {
         var userId = req.params.userId;
-        var user = userModel.findUserById(userId);
-        res.json(user);
+        userModel.findUserById(userId)
+            .then(
+                // login user if promise resolved
+                function ( doc ) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function login(req, res) {
         var credentials = req.body;
-        var user = userModel.findUserByCredentials(credentials.username, credentials.password);
-        req.session.currentUser = user;
-        res.json(user);
+        userModel.findUserByCredentials(credentials.username, credentials.password)
+            .then(
+                // login user if promise resolved
+                function ( doc ) {
+                    req.session.currentUser = doc;
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function loggedin(req, res) {

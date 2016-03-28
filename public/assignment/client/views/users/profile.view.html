@@ -6,7 +6,7 @@
     <div class="row placeholders">
         <form class="form-horizontal">
             <div class="form-group">
-                <label for="username" class="col-sm-3 control-label">Username</label>
+                <label for="username" class="col-sm-3 control-label">Username:</label>
                 <div class="col-sm-5">
                     <input ng-model="currentUser.username" type="text" class="form-control" id="username" placeholder="Username">
                 </div>
@@ -32,7 +32,7 @@
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
                 <div class="col-sm-5">
-                    <input ng-model="currentUser.email" type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    <input ng-model="currentUser.emails" ng-list="," type="email" class="form-control" id="inputEmail3" placeholder="Email">
                 </div>
             </div>
             <div class="form-group">
