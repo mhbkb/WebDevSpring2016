@@ -66,6 +66,7 @@ module.exports = function() {
 
     function updateFormById(formId, newForm) {
         var deferred = q.defer();
+        delete newForm._id;
 
         // find one retrieves one document
         FormModel.update({_id: formId}, newForm, {},

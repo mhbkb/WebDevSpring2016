@@ -139,6 +139,7 @@ module.exports = function() {
 
     function updateUser(userId, user) {
         var deferred = q.defer();
+        delete user._id;
 
         // find one retrieves one document
         UserModel.update({_id: userId}, user, {},

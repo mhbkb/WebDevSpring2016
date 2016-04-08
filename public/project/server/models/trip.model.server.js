@@ -73,6 +73,7 @@ module.exports = function() {
 
     function updateTrip(tripId, trip) {
         var deferred = q.defer();
+        delete trip._id;
 
         // find one retrieves one document
         TripModel.update({_id: tripId}, trip, {},

@@ -104,6 +104,7 @@ module.exports = function(app, userModel) {
             .then(
                 // login user if promise resolved
                 function ( doc ) {
+                    user['_id'] = userId;
                     req.session.currentUser = user;
                     res.json(user);
                 },
