@@ -1,0 +1,106 @@
+<div class="col-sm-9 main">
+    <h1 class="page-header">My Trips</h1>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+            <input type="text" class="form-control" placeholder="Filter trips" ng-model="searchTrips">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-hover table-striped table-bordered">
+                <tr class="header">
+                    <th class="col-sm-2">Trip Time</th>
+                    <th class="col-sm-3">Starting</th>
+                    <th class="col-sm-3">Destination</th>
+                    <th class="col-sm-2">Preferred Days</th>
+                    <th class="col-sm-2">Action</th>
+                </tr>
+                <tr ng-repeat="trip in trips | filter:searchTrips">
+                    <td><a href="#/trip/{{ trip._id}}">{{ trip.tripName}}</a></td>
+                    <td class="overflow">
+                        <a href="https://www.google.com/maps/place/{{trip.starting.name}}" target="_blank" uib-tooltip="{{trip.starting.name}}">
+                            {{trip.starting.name}}
+                        </a>
+                    </td>
+                    <td class="overflow">
+                        <a href="https://www.google.com/maps/place/{{trip.destination.name}}" target="_blank" uib-tooltip="{{trip.destination.name}}">
+                             {{trip.destination.name}}
+                        </a>
+                    </td>
+                    <td nowrap>
+                        <span ng-repeat="day in trip.preferredDays">
+                            {{ day }}
+                        </span>
+                    </td>
+                    <td>
+                        <a class="col-sm-1" ng-click="popTrip(trip)"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a class="col-sm-1"><span class="glyphicon glyphicon-picture"></span></a>
+                        <a class="col-sm-1" ng-click="deleteTripById(trip._id)"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <a class="col-sm-6" ng-click="popTrip('')">
+                            <span class="glyphicon glyphicon-plus pull-right" style="font-size:3em;"></span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/ng-template" id="placeTemplate.html">
+        <a>
+            <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+        </a>
+    </script>
+
+    <script type="text/ng-template" id="myModal">
+        <div class="modal-header">
+            <h3 class="modal-title">{{ modalTitle}}</h3>
+        </div>
+        <div class="modal-body">
+            TripName: <input type="text" class="form-control" ng-model="trip.tripName"> <br/>
+            Starting:
+            <input type="text" ng-model="trip.starting" typeahead-min-length="3" placeholder="Type your trip starting place" ng-change="getStartingPlaces(trip.starting)"
+                   uib-typeahead="place as place.name for place in matchPlaces"
+                   typeahead-template-url="placeTemplate.html" class="form-control" typeahead-show-hint="true" typeahead-min-length="0">
+            Destination:
+            <input type="text" ng-model="trip.destination" typeahead-min-length="3" placeholder="Type your trip destination" ng-change="getStartingPlaces(trip.destination)"
+                   uib-typeahead="place as place.name for place in matchPlaces"
+                   typeahead-template-url="placeTemplate.html" class="form-control" typeahead-show-hint="true" typeahead-min-length="0"><br>
+            Preferred times: <br/>
+            <div class="input-group">
+                <div class="checkbox">
+                    <label ng-repeat="timeOpt in timeOptions">
+                        <input type="checkbox" checklist-model="trip.preferredTimes" checklist-value="timeOpt.value" > {{ timeOpt.label}}
+                    </label>
+                </div>
+            </div>
+            Preferred days: <br/>
+            <div class="input-group">
+                <div class="checkbox">
+                    <label ng-repeat="dayOpt in daysOptions">
+                        <input type="checkbox" checklist-model="trip.preferredDays" checklist-value="dayOpt.value" > {{ dayOpt.label}}
+                    </label>
+                </div>
+            </div>
+            Is public: <br/>
+            <div class="input-group">
+                <div class="radio">
+                    <label>
+                        <input type="radio" value="1" ng-model="trip.isPublic"> Public
+                    </label>
+                    <label>
+                        <input type="radio" value="2" ng-model="trip.isPublic"> Private
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="addOrUpdateTrip(trip)">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancelModal()">Cancel</button>
+        </div>
+    </script>
+</div>

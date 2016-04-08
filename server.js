@@ -31,8 +31,6 @@ app.use(session({ secret: process.env.PASSPORT_SECRET }));
 app.use(cookieParser())
 
 require("./public/assignment/server/app.js")(app, db);
+require("./public/project/server/app.js")(app, db);
 
-app.get('/hello', function(req, res){
-    res.send('hello world');
-});
 app.listen(port, ipaddress);

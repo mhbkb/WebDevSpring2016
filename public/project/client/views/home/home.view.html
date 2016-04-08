@@ -1,0 +1,44 @@
+<div class="col-sm-9 main">
+    <h1 class="page-header">Active Trips</h1>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+            <input type="text" class="form-control" placeholder="Filter trips" ng-model="searchTrips">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-hover table-striped table-bordered">
+                <tr class="header">
+                    <th class="col-sm-3">Trip Time</th>
+                    <th class="col-sm-3">Starting</th>
+                    <th class="col-sm-3">Destination</th>
+                    <th class="col-sm-2">Preferred Days</th>
+                    <th class="col-sm-1">Show</th>
+                </tr>
+                <tr ng-repeat="trip in trips | filter:searchTrips">
+                    <td><a href="#/trip/{{ trip._id}}">{{ trip.tripName}}</a></td>
+                    <td class="overflow">
+                        <a href="https://www.google.com/maps/place/{{trip.starting.name}}" target="_blank" uib-tooltip="{{trip.starting.name}}">
+                            {{trip.starting.name}}
+                        </a>
+                    </td>
+                    <td class="overflow">
+                        <a href="https://www.google.com/maps/place/{{trip.destination.name}}" target="_blank" uib-tooltip="{{trip.destination.name}}">
+                            {{trip.destination.name}}
+                        </a>
+                    </td>
+                    <td nowrap>
+                        <span ng-repeat="day in trip.preferredDays">
+                            {{ day }}
+                        </span>
+                    </td>
+                    <td>
+                        <a class="col-sm-1"><span class="glyphicon glyphicon-picture"></span></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
