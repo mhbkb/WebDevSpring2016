@@ -12,12 +12,17 @@
         function login(user) {
             UserService
                 .findUserByCredentials(user)
-                .then(function(response) {
-                    if (response) {
-                        UserService.setCurrentUser(response);
-                        $location.url("/profile");
+                .then(
+                    function(response) {
+                        if (response) {
+                            UserService.setCurrentUser(response);
+                            $location.url("/profile");
+                        }
+                    },
+                    function(err) {
+                        $scope.message = 'No Matched User Find!';
                     }
-                });
+                );
         }
     }
 })();

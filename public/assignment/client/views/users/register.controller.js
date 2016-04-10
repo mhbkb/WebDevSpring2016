@@ -29,13 +29,13 @@
                 return;
             }
 
-            if (user.emailStr.length > 0) {
+            if (user.emailStr && user.emailStr.length > 0) {
                 user.emails = user.emailStr.split(",");
             } else {
                 user.emails = [];
             }
 
-            if (user.phoneStr.length > 0) {
+            if (user.phoneStr && user.phoneStr.length > 0) {
                 user.phones = user.phoneStr.split(",");
             } else {
                 user.phones = [];
