@@ -11,7 +11,8 @@ module.exports = function() {
         password: String,
         firstName: String,
         lastName: String,
-        email: String
+        email: String,
+        roles: [String]
     }, {collection: 'trip_user'});
     return UserSchema;
 };

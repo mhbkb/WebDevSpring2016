@@ -6,13 +6,21 @@
         .module("TripTimeApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($location, $scope, UserService) {
+    function HeaderController($location, $scope, $rootScope, UserService) {
         $scope.location = $location;
         $scope.logout = logout;
 
         function logout() {
-            UserService.logout();
-            $location.url("/home");
+            UserService.logout()
+                .then(
+                    function(response){
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    },
+                    function(err) {
+                        $scope.error = err;
+                    }
+                );
         }
     }
 })();

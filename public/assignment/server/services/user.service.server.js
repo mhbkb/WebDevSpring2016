@@ -10,7 +10,7 @@ module.exports = function(app, userModel) {
     app.get("/api/assignment/user/:userId", findUserById);
     app.put("/api/assignment/user/:userId", auth, updateUser);
 
-    app.post("/api/assignment/user/login", passport.authenticate('local'), login);
+    app.post("/api/assignment/user/login", passport.authenticate('assignment'), login);
     app.get("/api/assignment/user/session/loggedin", loggedin);
     app.post("/api/assignment/user/session/logout", logout);
     app.get("/api/assignment/user/profile/:userId", auth, profile);
@@ -21,7 +21,7 @@ module.exports = function(app, userModel) {
     app.delete("/api/assignment/admin/user/:userId", auth, adminAuth, adminDeleteUserById)
     app.put("/api/assignment/admin/user/:userId", auth, adminAuth, adminUpdateUser);
 
-    passport.use(new LocalStrategy(localStrategy));
+    passport.use('assignment', new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
