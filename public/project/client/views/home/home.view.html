@@ -17,7 +17,7 @@
                     <th class="col-sm-1">Show</th>
                 </tr>
                 <tr ng-repeat="trip in trips | filter:searchTrips">
-                    <td><a href="#/trip/{{ trip._id}}">{{ trip.tripName}}</a></td>
+                    <td><a href="#/trip/{{ trip._id}}/cost">{{ trip.tripName}}</a></td>
                     <td class="overflow">
                         <a href="https://www.google.com/maps/place/{{trip.starting.name}}" target="_blank" uib-tooltip="{{trip.starting.name}}">
                             {{trip.starting.name}}
@@ -34,7 +34,7 @@
                         </span>
                     </td>
                     <td>
-                        <a class="col-sm-1"><span class="glyphicon glyphicon-picture"></span></a>
+                        <a class="col-sm-1" href="#/trip/{{ trip._id}}/cost"><span class="glyphicon glyphicon-picture"></span></a>
                     </td>
                 </tr>
             </table>

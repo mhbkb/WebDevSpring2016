@@ -42,6 +42,11 @@
                     checkLoggedIn: checkLoggedIn
                 }
             })
+            .when("/trip/:tripId/cost", {
+                templateUrl: "views/trip/cost.view.html",
+                controller: "CostController",
+                controllerAs: "model"
+            })
             .when("/index", {
                 templateUrl: "index.html"
             })

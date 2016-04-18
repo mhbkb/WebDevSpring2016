@@ -3,5 +3,5 @@
  */
 (function(){
     angular
-        .module("TripTimeApp", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'checklist-model']);
+        .module("TripTimeApp", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'checklist-model', 'n3-line-chart']);
 })();

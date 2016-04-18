@@ -10,14 +10,14 @@
         <div class="col-sm-12">
             <table class="table table-hover table-striped table-bordered">
                 <tr class="header">
-                    <th class="col-sm-2">Trip Time</th>
+                    <th class="col-sm-2">Trip Name</th>
                     <th class="col-sm-3">Starting</th>
                     <th class="col-sm-3">Destination</th>
                     <th class="col-sm-2">Preferred Days</th>
                     <th class="col-sm-2">Action</th>
                 </tr>
                 <tr ng-repeat="trip in trips | filter:searchTrips">
-                    <td><a href="#/trip/{{ trip._id}}">{{ trip.tripName}}</a></td>
+                    <td><a href="#/trip/{{ trip._id}}/cost">{{ trip.tripName}}</a></td>
                     <td class="overflow">
                         <a href="https://www.google.com/maps/place/{{trip.starting.name}}" target="_blank" uib-tooltip="{{trip.starting.name}}">
                             {{trip.starting.name}}
@@ -35,7 +35,7 @@
                     </td>
                     <td>
                         <a class="col-sm-1" ng-click="popTrip(trip)"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a class="col-sm-1"><span class="glyphicon glyphicon-picture"></span></a>
+                        <a class="col-sm-1" href="#/trip/{{ trip._id}}/cost"><span class="glyphicon glyphicon-picture"></span></a>
                         <a class="col-sm-1" ng-click="deleteTripById(trip._id)"><span class="glyphicon glyphicon-trash"></span></a>
                     </td>
                 </tr>

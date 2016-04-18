@@ -20,7 +20,7 @@ module.exports = function(tripModel, costModel, googlemapService) {
                     if(days) {
                         // Pass days restrict
                         if((currentDay >= 1 && currentDay <= 5 && days.indexOf("workdays") > -1)
-                            || ((currentDay === 0 || currentDay === 6) && days.indexOf("weekends"))){
+                            || ((currentDay === 0 || currentDay === 6) && days.indexOf("weekends") > -1)){
                             // Pass times restrict
                             if(times) {
                                 for(var j in times) {

@@ -1,0 +1,12 @@
+<div class="col-sm-9 main">
+    <h1 class="page-header">Costs Graph For {{trip.tripName}}</h1>
+
+    <div class="chart">
+        <div class="chart-info">
+            Min cost: <strong class="bg-warning">{{ min_cost}}</strong> Minutes &nbsp;
+            Max cost: <strong class="bg-info">{{ min_cost}}</strong> Minutes &nbsp;
+            Avg cost: <strong class="bg-danger">{{ min_cost}}</strong> Minutes &nbsp;
+        </div>
+        <linechart data="data" options="options"></linechart>
+    </div>
+</div>
