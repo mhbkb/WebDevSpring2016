@@ -14,13 +14,13 @@
                 .findUserByCredentials(user)
                 .then(
                     function(response) {
-                        if (response) {
-                            UserService.setCurrentUser(response);
+                        if (response.data) {
+                            UserService.setCurrentUser(response.data);
                             $location.url("/profile");
+                        } else {
+                            $scope.message = 'No Matched User Find!';
+
                         }
-                    },
-                    function(err) {
-                        $scope.message = 'No Matched User Find!';
                     }
                 );
         }
