@@ -1,18 +1,27 @@
+var passport         = require('passport');
+var LocalStrategy    = require('passport-local').Strategy;
+
 /**
  * Created by maohao on 16/3/10.
  */
 module.exports = function(app, userModel) {
+    var auth = authorized;
+    var adminAuth = adminAuth;
+    passport.use('project', new LocalStrategy(localStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
     app.post("/api/project/user", register);
     app.get("/api/project/user", findUser);
     app.get("/api/project/user/:userId", findUserById);
-    app.put("/api/project/user/:userId", updateUser);
-    app.delete("/api/project/user/:userId", deleteUserById)
+    app.put("/api/project/user/:userId", auth, updateUser);
+    app.delete("/api/project/user/:userId", auth, deleteUserById)
 
-    app.post("/api/project/user/login", login);
+    app.post("/api/project/user/login", passport.authenticate('project'), login);
     app.get("/api/project/user/session/loggedin", loggedin);
     app.post("/api/project/user/session/logout", logout);
 
-    app.get("/api/project/user/profile/:userId", profile);
+    app.get("/api/project/user/profile/:userId", auth, profile);
 
     app.get("/api/project/admin/user", adminAuth, adminFindAllUsers)
     app.get("/api/project/admin/user/:userId", adminAuth, adminFindUserById);
@@ -26,11 +35,18 @@ module.exports = function(app, userModel) {
 
         userModel.createUser(user)
             .then(
-                function( doc ) {
-                    req.session.currentUser = doc;
-                    res.json(doc);
+                function(user){
+                    if(user){
+                        req.login(user, function(err) {
+                            if(err) {
+                                res.status(400).send(err);
+                            } else {
+                                res.json(user);
+                            }
+                        });
+                    }
                 },
-                function( err ) {
+                function(err){
                     res.status(400).send(err);
                 }
             );
@@ -154,36 +170,64 @@ module.exports = function(app, userModel) {
     }
 
     function login(req, res) {
-        var credentials = req.body;
-        userModel.findUserByCredentials(credentials.username, credentials.password)
-            .then(
-                // login user if promise resolved
-                function ( doc ) {
-                    req.session.currentUser = doc;
-                    res.json(doc);
-                },
-                // send error if promise rejected
-                function ( err ) {
-                    res.status(400).send(err);
-                }
-            );
+        var user = req.user;
+        res.json(user);
     }
 
     function loggedin(req, res) {
-        res.json(req.session.currentUser);
+        res.send(req.isAuthenticated() ? req.user : '0');
     }
 
     function logout(req, res) {
-        req.session.destroy();
+        req.logOut();
         res.send(200);
     }
 
+    function authorized (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else {
+            next();
+        }
+    }
+
     function adminAuth(req, res, next) {
-        if(req.session.currentUser.roles.indexOf("admin") > -1) {
+        if(req.user.roles.indexOf("admin") > -1) {
             next();
         } else {
             res.send(403);
         }
+    }
+
+    function localStrategy(username, password, done) {
+        userModel
+            .findUserByCredentials(username, password)
+            .then(
+                function(user) {
+                    if (!user) { return done(null, false); }
+                    return done(null, user);
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            );
+    }
+
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    function deserializeUser(user, done) {
+        userModel
+            .findUserById(user._id)
+            .then(
+                function(user){
+                    done(null, user);
+                },
+                function(err){
+                    done(err, null);
+                }
+            );
     }
 
     function adminFindAllUsers(req, res) {
