@@ -23,16 +23,20 @@
                         var max_cost = 0;
                         var sum_cost = 0;
                         for(var i in costs) {
-                            var cost_minute = (costs[i].spend / 60).toFixed(2);
+                            var cost_minute = (costs[i].spend / 60).toFixed(2) - 0;
+
+                            console.log(cost_minute);
+                            console.log(max_cost);
+                            if (cost_minute > max_cost) {
+                                max_cost = cost_minute;
+                            }
+                            if (cost_minute < min_cost) {
+                                min_cost = cost_minute;
+                            }
+                            sum_cost = sum_cost + cost_minute;
+
                             var cost = {'x': new Date(costs[i].created), 'y': cost_minute};
                             dataset.push(cost);
-                            if (new Number(cost_minute) > new Number(max_cost)) {
-                                max_cost = new Number(cost_minute);
-                            }
-                            if (new Number(cost_minute) < new Number(min_cost)) {
-                                min_cost = new Number(cost_minute);
-                            }
-                            sum_cost = sum_cost + new Number(cost_minute);
                         }
                         $scope.min_cost = min_cost;
                         $scope.max_cost = max_cost;
