@@ -6,7 +6,7 @@
         .module("TripTimeApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, UserService, $location) {
+    function ProfileController($scope, UserService, $location, GoogleMapService) {
         $scope.error = null;
         $scope.message = null;
 
@@ -21,6 +21,7 @@
         }
 
         $scope.updateUser = updateUser;
+        $scope.getHomeAddress = getHomeAddress;
 
         function updateUser(user) {
             $scope.error = null;
@@ -36,6 +37,23 @@
                         $scope.message = "Unable to update the user";
                     }
                 });
+        }
+
+        function getHomeAddress(input) {
+            if(input && input.length > 3) {
+                $scope.matchPlaces = [];
+                GoogleMapService.searchPlaces(input)
+                    .then(function(response) {
+                        var matchedResults = response.data.predictions;
+                        var places = [];
+                        for(var i in matchedResults) {
+                            var place = {'name' : matchedResults[i].description,
+                                'placeId'   : matchedResults[i].place_id };
+                            places.push(place);
+                        }
+                        $scope.matchPlaces = places;
+                    });
+            }
         }
     }
 })();

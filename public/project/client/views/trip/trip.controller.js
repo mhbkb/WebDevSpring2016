@@ -61,7 +61,12 @@
                 $scope.trip = trip;
             } else {
                 $scope.modalTitle = "New Trip";
-                $scope.trip = {};
+                var newTrip = {};
+                newTrip.isPublic = false;
+                newTrip.preferredDays = [
+                    "workdays", "weekends"
+                ]
+                $scope.trip = newTrip;
             }
 
             $scope.timeOptions = [
