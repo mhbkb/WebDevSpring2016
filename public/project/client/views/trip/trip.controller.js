@@ -13,6 +13,7 @@
         $scope.deleteTripById = deleteTripById;
         $scope.popTrip = popTrip;
         $scope.getStartingPlaces = getStartingPlaces;
+        $scope.preferredDays = preferredDays;
 
         var userId = $scope.currentUser._id;
         TripService
@@ -111,6 +112,10 @@
                         $scope.matchPlaces = places;
                     });
             }
+        }
+
+        function preferredDays(preferredDays) {
+            $scope.selectedPreferredDays = preferredDays;
         }
     }
 
