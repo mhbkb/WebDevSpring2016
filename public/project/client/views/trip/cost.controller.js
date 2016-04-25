@@ -25,8 +25,6 @@
                         for(var i in costs) {
                             var cost_minute = (costs[i].spend / 60).toFixed(2) - 0;
 
-                            console.log(cost_minute);
-                            console.log(max_cost);
                             if (cost_minute > max_cost) {
                                 max_cost = cost_minute;
                             }

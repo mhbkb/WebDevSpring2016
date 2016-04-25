@@ -180,6 +180,7 @@ module.exports = function(app, userModel) {
     function loggedin(req, res) {
         if(!req.isAuthenticated()) {
             res.send('0');
+            return;
         }
         var user = req.user;
         if(user && (!user.home || !user.home.placeId)) {

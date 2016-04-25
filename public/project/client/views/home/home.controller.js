@@ -35,17 +35,16 @@
                         }
 
                         $scope.trips = [];
-                        for(var i in currentTrips) {
-                            var currentTrip = currentTrips[i];
+                        currentTrips.forEach(function (currentTrip) {
                             GoogleMapService.distancesCount(currentTrip.starting.placeId, currentUser.home.placeId)
-                                .then(function(response) {
-                                    var count = response.data - 0.0;
+                                .then(function(response2) {
+                                    var count = response2.data - 0.0;
                                     if(count <= (mileCount - 0)) {
                                         currentTrip.distance = count;
                                         $scope.trips.push(currentTrip);
                                     }
                                 })
-                        }
+                        })
                     } else {
                         $scope.trips = currentTrips;
                     }
