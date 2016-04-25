@@ -171,11 +171,21 @@ module.exports = function(app, userModel) {
 
     function login(req, res) {
         var user = req.user;
+        if(!user.home || !user.home.placeId) {
+            user.home = null;
+        }
         res.json(user);
     }
 
     function loggedin(req, res) {
-        res.send(req.isAuthenticated() ? req.user : '0');
+        if(!req.isAuthenticated()) {
+            res.send('0');
+        }
+        var user = req.user;
+        if(user && (!user.home || !user.home.placeId)) {
+            user.home = null;
+        }
+        res.send(user);
     }
 
     function logout(req, res) {
@@ -204,7 +214,12 @@ module.exports = function(app, userModel) {
             .findUserByCredentials(username, password)
             .then(
                 function(user) {
-                    if (!user) { return done(null, false); }
+                    if (!user) {
+                        return done(null, false);
+                    }
+                    if(!user.home || !user.home.placeId) {
+                        user.home = null;
+                    }
                     return done(null, user);
                 },
                 function(err) {

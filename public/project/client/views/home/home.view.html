@@ -1,9 +1,32 @@
 <div class="col-sm-9 main">
     <h1 class="page-header">Active Trips</h1>
+    <div ng-show="message" class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        <a href='#/profile'>{{ message}}</a>
+    </div>
     <div class="form-group">
         <div class="input-group">
             <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
-            <input type="text" class="form-control" placeholder="Filter trips" ng-model="searchTrips">
+            <div class="row">
+                <div ng-class="{'col-sm-7': currentUser,'col-sm-10': !currentUser}">
+                    <input type="text" class="form-control" placeholder="Filter trips" ng-model="searchTrips">
+                </div>
+                <div ng-hide="!currentUser" class="col-sm-3">
+                    <select class="form-control" ng-model="tripNearCount">
+                        <option value="3" ng-click="tripNearMe('3')">In 3 miles</option>
+                        <option value="5" ng-click="tripNearMe('5')">In 5 miles</option>
+                        <option value="" ng-click="tripNearMe()">Distance From Home</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <select class="form-control" ng-model="selectedPreferredDays">
+                        <option value="workdays" ng-click="preferredDays('workdays')">Workdays</option>
+                        <option value="weekends" ng-click="preferredDays('weekends')">Weekends</option>
+                        <option value="" ng-click="preferredDays()">All Days</option>
+                    </select>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -11,13 +34,15 @@
             <table class="table table-hover table-striped table-bordered">
                 <tr class="header">
                     <th class="col-sm-3">Trip Time</th>
-                    <th class="col-sm-3">Starting</th>
-                    <th class="col-sm-3">Destination</th>
-                    <th class="col-sm-2">Preferred Days</th>
+                    <th class="col-sm-4">Starting</th>
+                    <th class="col-sm-4">Destination</th>
                     <th class="col-sm-1">Show</th>
                 </tr>
-                <tr ng-repeat="trip in trips | filter:searchTrips">
-                    <td><a href="#/trip/{{ trip._id}}/cost">{{ trip.tripName}}</a></td>
+                <tr ng-repeat="trip in trips | filter:searchTrips | filter: { preferredDays: selectedPreferredDays}">
+                    <td>
+                        <a href="#/trip/{{ trip._id}}/cost">{{ trip.tripName}}</a>
+                        <span ng-hide="{{ !trip.distance}}" class="badge" style="float: right">{{ trip.distance}} miles</span>
+                    </td>
                     <td class="overflow">
                         <a href="https://www.google.com/maps/place/{{trip.starting.name}}" target="_blank" uib-tooltip="{{trip.starting.name}}">
                             {{trip.starting.name}}
@@ -27,11 +52,6 @@
                         <a href="https://www.google.com/maps/place/{{trip.destination.name}}" target="_blank" uib-tooltip="{{trip.destination.name}}">
                             {{trip.destination.name}}
                         </a>
-                    </td>
-                    <td nowrap>
-                        <span ng-repeat="day in trip.preferredDays">
-                            {{ day }}
-                        </span>
                     </td>
                     <td>
                         <a class="col-sm-1" href="#/trip/{{ trip._id}}/cost"><span class="glyphicon glyphicon-picture"></span></a>

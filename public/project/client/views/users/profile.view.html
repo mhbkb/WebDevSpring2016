@@ -34,7 +34,7 @@
                 <div class="col-sm-5">
                     <input type="text" id="home" ng-model="currentUser.home" placeholder="Type your home address" ng-change="getHomeAddress(currentUser.home)"
                            uib-typeahead="place as place.name for place in matchPlaces"
-                           typeahead-template-url="placeTemplate.html" class="form-control" typeahead-show-hint="true" typeahead-min-length="0">
+                           typeahead-template-url="placeTemplate.html" class="form-control" typeahead-show-hint="true" typeahead-min-length="0" placeholder="Type your home address">
 
                 </div>
             </div>
